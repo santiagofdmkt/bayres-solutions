@@ -54,7 +54,7 @@ export default function Galeria() {
         </div>
 
         <p className="text-center text-xs text-gris-medio mt-6">
-          * Las fotos se reemplazan con imágenes reales del trabajo de Bayres
+          * Próximamente las imágenes
         </p>
       </div>
     </section>
