@@ -4,14 +4,26 @@
 export const site = {
   nombre: "Bayres Solutions",
 
-  // Formato internacional, SIN el +, sin espacios ni guiones.
-  // Ej: (11) 4567-8900  =>  "5491145678900"
-  whatsapp: "5491100000000",
+  // Teléfono fijo. Formato internacional SIN el +, sin espacios ni guiones.
+  // Es línea fija, por eso NO lleva el 9 después del 54.
+  // 011 5226-2061  =>  "541152262061"
+  telefono: "541152262061",
 
   // Como se muestra en pantalla
-  telefonoVisible: "11 0000-0000",
+  telefonoVisible: "011 5226-2061",
+
+  // WhatsApp. Si es celular lleva 9: "5491112345678".
+  // Si es fijo con WhatsApp Business, va sin 9.
+  // PENDIENTE: confirmar con el cliente. Hoy apunta al fijo.
+  whatsapp: "541152262061",
 
   email: "contacto@bayressolutions.com.ar",
+
+  // Ubicación (se usa en Footer y en el JSON-LD LocalBusiness)
+  direccion: "Cuba 3489",
+  barrio: "Núñez",
+  ciudad: "Ciudad Autónoma de Buenos Aires",
+  codigoPostal: "C1429",
   zonas: "CABA y Gran Buenos Aires",
 
   // OJO: estos números tienen que ser reales.
@@ -30,4 +42,4 @@ export function waLink(mensaje: string) {
 }
 
 /** Link para llamar desde el celular. */
-export const telLink = `tel:+${site.whatsapp}`;
+export const telLink = `tel:+${site.telefono}`;
