@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Clock, MessageCircle, AtSign } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { site, waLink, telLink } from "../lib/site";
 
 const servicios = [
@@ -133,16 +133,7 @@ export default function Footer() {
             © {anio} {site.nombre}. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-3">
-            {site.instagram && (
-              <a href={`https://instagram.com/${site.instagram}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-9 h-9 rounded-full border border-white/15 hover:border-verde-claro hover:bg-verde-oscuro text-white/70 hover:text-white flex items-center justify-center transition-colors"
-              >
-                <AtSign size={16} />
-              </a>
-            )}
+           
             <a href={waLink("Hola! Quiero hacer una consulta.")}
               target="_blank"
               rel="noopener noreferrer"
