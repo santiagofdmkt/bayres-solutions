@@ -6,7 +6,12 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { site, waLink } from "../lib/site";
 
 // Fotos de fondo. Cuando lleguen las reales, reemplazar en public/hero/ con el mismo nombre.
-const FOTOS = ["/hero/hero-3.jpeg", "/hero/hero-2.webp", "/hero/hero-1.jpeg"];
+const FOTOS = [
+  "/hero/hero-1.jpg",
+  "/hero/hero-2.jpg",
+  "/hero/hero-3.jpg",
+  "/hero/hero-4.jpg",
+];
 const INTERVALO_MS = 6000;
 
 const inputClass =

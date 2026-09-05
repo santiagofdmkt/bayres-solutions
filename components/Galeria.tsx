@@ -5,11 +5,13 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 
 // Fotos en public/galeria/. Reemplazar por trabajos reales con el mismo nombre.
+// span: cuánto ocupa cada foto en la grilla. La primera va grande (2×2).
 const fotos = [
-  { src: "/galeria/galeria-1.jpeg", titulo: "Trabajo en local comercial", bg: "bg-[#163a24]" },
-  { src: "/galeria/galeria-2.jpeg", titulo: "Equipo en acción", bg: "bg-[#2a4a2a]" },
-  { src: "/galeria/galeria-3.webp", titulo: "Depósito y logística", bg: "bg-verde-oscuro" },
-  { src: "/galeria/galeria-5.png", titulo: "Desinfección", bg: "bg-[#1a4a2a]" },
+  { src: "/galeria/galeria-1.jpg", titulo: "Tratamiento residencial", bg: "bg-[#163a24]", span: "col-span-2 row-span-2" },
+  { src: "/galeria/galeria-2.jpg", titulo: "Desinsectación", bg: "bg-[#2a4a2a]", span: "" },
+  { src: "/galeria/galeria-3.jpg", titulo: "Desratización", bg: "bg-verde-oscuro", span: "" },
+  { src: "/galeria/galeria-4.jpg", titulo: "Limpieza de tanques", bg: "bg-[#0f3d1f]", span: "" },
+  { src: "/galeria/galeria-5.jpg", titulo: "Desinfección", bg: "bg-[#1a4a2a]", span: "" },
 ];
 
 export default function Galeria() {
@@ -69,7 +71,7 @@ export default function Galeria() {
           initial="oculto"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                  className="grid grid-cols-2 lg:grid-cols-4 auto-rows-[160px] sm:auto-rows-[200px] lg:auto-rows-[220px] gap-4"
         >
           {fotos.map((f, i) => (
             <motion.button
@@ -78,7 +80,7 @@ export default function Galeria() {
               type="button"
               onClick={() => setAbierta(i)}
               aria-label={`Ver ${f.titulo}`}
-              className={`group relative aspect-[4/3] rounded-lg overflow-hidden ${f.bg} shadow-md hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-verde-claro transition-shadow`}
+                           className={`group relative ${f.span} rounded-lg overflow-hidden ${f.bg} shadow-md hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-verde-claro transition-shadow`}
             >
               <div
                 aria-hidden="true"
