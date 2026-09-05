@@ -8,6 +8,7 @@ import Galeria from "@/components/Galeria";
 import FAQ from "@/components/FAQ";
 import Contacto from "@/components/Contacto";
 import Footer from "@/components/Footer";
+import VolverArriba from "@/components/VolverArriba";
 
 export default function Home() {
   return (
@@ -16,12 +17,13 @@ export default function Home() {
       <Hero />
       <Servicios />
       <CtaBand />
-      <Cobertura />
+      <FAQ />
       <Clientes />
       <Galeria />
-      <FAQ />
+      <Cobertura />
       <Contacto />
       <Footer />
+      <VolverArriba />
     </main>
   );
 }

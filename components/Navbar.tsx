@@ -9,9 +9,9 @@ import { site, waLink } from "../lib/site";
 
 const links = [
   { href: "#servicios", label: "Servicios" },
-  { href: "#cobertura", label: "Cobertura" },
-  { href: "#galeria", label: "Galería" },
   { href: "#faq", label: "Preguntas frecuentes" },
+  { href: "#galeria", label: "Galería" },
+  { href: "#cobertura", label: "Cobertura" },
   { href: "#contacto", label: "Contacto" },
 ];
 
