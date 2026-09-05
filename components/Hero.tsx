@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { site, waLink } from "../lib/site";
+import { registrarLead } from "../lib/leads";
 
 // Fotos de fondo. Cuando lleguen las reales, reemplazar en public/hero/ con el mismo nombre.
 const FOTOS = [
@@ -82,6 +83,18 @@ export default function Hero() {
       campo("direccion") && `Dirección: ${campo("direccion")}`,
       campo("problema") && `Problema: ${campo("problema")}`,
     ].filter(Boolean);
+
+       registrarLead(
+      {
+        nombre: campo("nombre"),
+        apellido: campo("apellido"),
+        email: campo("email"),
+        telefono: campo("telefono"),
+        direccion: campo("direccion"),
+        problema: campo("problema"),
+      },
+      "hero"
+    );
 
     window.open(waLink(lineas.join("\n")), "_blank");
   }

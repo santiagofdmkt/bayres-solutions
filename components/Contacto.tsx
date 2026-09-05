@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, Phone, Mail, AtSign, MessageCircle } from "lucide-react";
 import { site, waLink, telLink } from "../lib/site";
+import { registrarLead } from "../lib/leads";
 
 const inputClass =
   "bg-white/[0.08] border border-white/15 rounded px-3.5 py-2.5 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-verde-claro focus:ring-1 focus:ring-verde-claro transition-colors";
@@ -25,6 +26,18 @@ export default function Contacto() {
       campo("direccion") && `Dirección: ${campo("direccion")}`,
       campo("problema") && `Problema: ${campo("problema")}`,
     ].filter(Boolean);
+
+      registrarLead(
+      {
+        nombre: campo("nombre"),
+        apellido: campo("apellido"),
+        email: campo("email"),
+        telefono: campo("telefono"),
+        direccion: campo("direccion"),
+        problema: campo("problema"),
+      },
+      "contacto"
+    );
 
     window.open(waLink(lineas.join("\n")), "_blank");
   }
