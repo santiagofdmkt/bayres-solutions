@@ -41,7 +41,7 @@ export default function Cobertura() {
   return (
      <section
       id="cobertura"
-      className="relative py-20 px-6 bg-gradient-to-br from-gris-claro via-[#e6f3e7] to-[#cfe9d2] overflow-hidden"
+           className="relative py-12 lg:py-20 px-6 bg-gradient-to-br from-gris-claro via-[#e6f3e7] to-[#cfe9d2] overflow-hidden"
     >
       {/* Manchas verdes difusas */}
       <div

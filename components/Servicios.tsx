@@ -53,7 +53,7 @@ export default function Servicios() {
   };
 
   return (
-       <section id="servicios" className="relative py-20 px-6 bg-gris-claro overflow-hidden">
+         <section id="servicios" className="relative py-12 lg:py-20 px-6 bg-gris-claro overflow-hidden">
       {/* Manchas verdes difusas de fondo */}
       <div
         aria-hidden="true"

@@ -40,7 +40,7 @@ export default function Clientes() {
   const cinta = [...clientes, ...clientes];
 
   return (
-    <section className="bg-negro py-14 overflow-hidden">
+       <section className="bg-negro py-10 lg:py-14 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 text-center mb-8">
         <div className="text-[10px] font-bold text-verde-claro tracking-[3px] uppercase mb-2">
           Empresas que confían en nosotros

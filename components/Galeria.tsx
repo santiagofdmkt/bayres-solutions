@@ -53,7 +53,7 @@ export default function Galeria() {
   };
 
   return (
-    <section id="galeria" className="py-20 px-6 bg-gris-claro">
+       <section id="galeria" className="py-12 lg:py-20 px-6 bg-gris-claro">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-12">

@@ -78,7 +78,7 @@ export default function Contacto() {
   };
 
   return (
-    <section id="contacto" className="relative py-20 px-6 bg-negro overflow-hidden">
+       <section id="contacto" className="relative py-12 lg:py-20 px-6 bg-negro overflow-hidden">
       {/* Brillo verde detrás del formulario */}
       <div
         aria-hidden="true"

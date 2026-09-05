@@ -52,7 +52,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative py-20 px-6 bg-white overflow-hidden"
+           className="relative py-12 lg:py-20 px-6 bg-white overflow-hidden"
       style={{
         backgroundImage: "radial-gradient(rgba(45,158,63,0.14) 1px, transparent 1px)",
         backgroundSize: "22px 22px",
