@@ -8,10 +8,8 @@ import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 const fotos = [
   { src: "/galeria/galeria-1.jpeg", titulo: "Trabajo en local comercial", bg: "bg-[#163a24]" },
   { src: "/galeria/galeria-2.jpeg", titulo: "Equipo en acción", bg: "bg-[#2a4a2a]" },
-  { src: "/galeria/galeria-3.webp", titulo: "Tratamiento residencial", bg: "bg-verde-oscuro" },
-  { src: "/galeria/galeria-4.jpeg", titulo: "Desratización", bg: "bg-[#0f3d1f]" },
+  { src: "/galeria/galeria-3.webp", titulo: "Depósito y logística", bg: "bg-verde-oscuro" },
   { src: "/galeria/galeria-5.png", titulo: "Desinfección", bg: "bg-[#1a4a2a]" },
-   { src: "/galeria/galeria-6.jpeg", titulo: "Limpieza en fábricas", bg: "bg-[#2d6a30]" },
 ];
 
 export default function Galeria() {
@@ -71,7 +69,7 @@ export default function Galeria() {
           initial="oculto"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {fotos.map((f, i) => (
             <motion.button

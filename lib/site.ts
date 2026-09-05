@@ -17,7 +17,8 @@ export const site = {
   // PENDIENTE: confirmar con el cliente. Hoy apunta al fijo.
   whatsapp: "541152262061",
 
-   email: "contacto@bayressolutions.com.ar",
+    // PENDIENTE: mail provisorio. Cambiar cuando tengan el del dominio propio.
+  email: "adm.bairessolutions@gmail.com",
 
   // Usuario de Instagram sin @. Dejar "" si no tienen cuenta y desaparece del sitio.
   // PENDIENTE: confirmar con el cliente.
@@ -27,7 +28,7 @@ export const site = {
   direccion: "Cuba 3489",
   barrio: "Núñez",
   ciudad: "Ciudad Autónoma de Buenos Aires",
-    codigoPostal: "1429",
+  codigoPostal: "1429",
   pais: "Argentina",
   zonas: "CABA y Gran Buenos Aires",
 
