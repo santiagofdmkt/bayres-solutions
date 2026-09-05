@@ -6,7 +6,7 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { site, waLink } from "../lib/site";
 import { registrarLead } from "../lib/leads";
 
-// Fotos de fondo. Cuando lleguen las reales, reemplazar en public/hero/ con el mismo nombre.
+// Fotos de fondo en public/hero/.
 const FOTOS = [
   "/hero/hero-1.jpg",
   "/hero/hero-2.jpg",
@@ -17,6 +17,8 @@ const INTERVALO_MS = 4500;
 
 const inputClass =
   "bg-white/[0.08] border border-white/15 rounded px-3.5 py-2.5 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-verde-claro focus:ring-1 focus:ring-verde-claro transition-colors";
+
+type Estado = "idle" | "enviando" | "ok" | "error";
 
 /** Número que cuenta desde 0 cuando entra en pantalla. Soporta "+500", "10+", "24hs". */
 function Contador({ valor }: { valor: string }) {
@@ -58,6 +60,7 @@ function Contador({ valor }: { valor: string }) {
 
 export default function Hero() {
   const [activa, setActiva] = useState(0);
+  const [estado, setEstado] = useState<Estado>("idle");
   const reducido = useReducedMotion();
 
   useEffect(() => {
@@ -68,35 +71,27 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
-  function enviarPorWhatsApp(e: React.FormEvent<HTMLFormElement>) {
+  async function enviarConsulta(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    const datos = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const datos = new FormData(form);
     const campo = (nombre: string) =>
       ((datos.get(nombre) as string) || "").trim();
 
-    const lineas = [
-      "Hola! Quiero pedir un presupuesto de control de plagas.",
-      `Nombre: ${campo("nombre")} ${campo("apellido")}`.trim(),
-      campo("email") && `Email: ${campo("email")}`,
-      campo("telefono") && `WhatsApp: ${campo("telefono")}`,
-      campo("direccion") && `Dirección: ${campo("direccion")}`,
-      campo("problema") && `Problema: ${campo("problema")}`,
-    ].filter(Boolean);
-
-       registrarLead(
+    setEstado("enviando");
+    const ok = await registrarLead(
       {
         nombre: campo("nombre"),
         apellido: campo("apellido"),
         email: campo("email"),
         telefono: campo("telefono"),
-        direccion: campo("direccion"),
+        barrio: campo("barrio"),
         problema: campo("problema"),
       },
       "hero"
     );
-
-    window.open(waLink(lineas.join("\n")), "_blank");
+    setEstado(ok ? "ok" : "error");
+    if (ok) form.reset();
   }
 
   // Animación de entrada: cada bloque aparece un poco después del anterior.
@@ -124,7 +119,7 @@ export default function Hero() {
         {FOTOS.map((src, i) => (
           <div
             key={src}
-                       className={`absolute inset-0 bg-cover bg-[position:65%_center] lg:bg-center transition-opacity duration-[1500ms] ease-in-out ${
+            className={`absolute inset-0 bg-cover bg-[position:65%_center] lg:bg-center transition-opacity duration-[1500ms] ease-in-out ${
               i === activa ? "opacity-100" : "opacity-0"
             } ${reducido ? "" : "kenburns"}`}
             style={{
@@ -134,7 +129,7 @@ export default function Hero() {
           />
         ))}
         {/* Overlay: oscuro a la izquierda para el texto, verde abajo para fundir con los stats */}
-               <div className="absolute inset-0 bg-gradient-to-b from-negro/85 via-negro/70 to-negro/85 lg:bg-gradient-to-r lg:from-negro/95 lg:via-negro/75 lg:to-negro/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-negro/85 via-negro/70 to-negro/85 lg:bg-gradient-to-r lg:from-negro/95 lg:via-negro/75 lg:to-negro/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-verde-oscuro/60 via-transparent to-transparent" />
       </div>
 
@@ -170,7 +165,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-                      className="text-white text-base lg:text-lg leading-relaxed mb-8 max-w-md drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+            className="text-white text-base lg:text-lg leading-relaxed mb-8 max-w-md drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
           >
             Servicio certificado para {site.zonas}. Atendemos hogares,
             comercios, industrias y consorcios con productos habilitados por
@@ -195,7 +190,7 @@ export default function Hero() {
         </div>
 
         {/* Formulario */}
-                <motion.div
+        <motion.div
           variants={item}
           className="w-full lg:w-[400px] bg-negro/60 backdrop-blur-md border border-white/15 rounded-lg p-7 flex-shrink-0 shadow-[0_24px_64px_rgba(0,0,0,0.5)]"
         >
@@ -203,10 +198,10 @@ export default function Hero() {
             Consultá sin cargo
           </h2>
           <p className="text-white/50 text-xs mb-5">
-            Te abrimos el WhatsApp con la consulta ya escrita.
+            Te respondemos a la brevedad por WhatsApp o mail.
           </p>
 
-          <form onSubmit={enviarPorWhatsApp} className="flex flex-col gap-3">
+          <form onSubmit={enviarConsulta} className="flex flex-col gap-3">
             <div className="grid grid-cols-2 gap-2">
               <input
                 type="text"
@@ -234,14 +229,14 @@ export default function Hero() {
             />
 
             <div className="grid grid-cols-2 gap-2">
-                           <input
+              <input
                 type="tel"
                 name="telefono"
                 required
                 inputMode="numeric"
                 maxLength={10}
                 pattern="[0-9]{10}"
-                                title="Ingresá 10 dígitos, sin 0 ni 15. Ej: 1123456789"
+                title="Ingresá 10 dígitos, sin 0 ni 15. Ej: 1123456789"
                 aria-label="WhatsApp"
                 placeholder="11 2345 6789"
                 onInput={(e) => {
@@ -252,9 +247,9 @@ export default function Hero() {
               />
               <input
                 type="text"
-                name="direccion"
-                aria-label="Dirección"
-                placeholder="Dirección"
+                name="barrio"
+                aria-label="Barrio o localidad"
+                placeholder="Barrio"
                 className={inputClass}
               />
             </div>
@@ -263,16 +258,32 @@ export default function Hero() {
               name="problema"
               aria-label="Contanos cuál es el problema"
               placeholder="Contanos cuál es el problema..."
-                          rows={4}
+              rows={4}
               className={`${inputClass} resize-none`}
             />
 
             <button
               type="submit"
-              className="bg-verde-medio hover:bg-verde-claro hover:text-negro text-white py-3 rounded font-display font-bold uppercase tracking-widest text-sm transition-colors"
+              disabled={estado === "enviando"}
+              className="bg-verde-medio hover:bg-verde-claro hover:text-negro disabled:opacity-60 disabled:cursor-wait text-white py-3 rounded font-display font-bold uppercase tracking-widest text-sm transition-colors"
             >
-              Enviar consulta
+              {estado === "enviando" ? "Enviando..." : "Enviar consulta"}
             </button>
+
+            {estado === "ok" && (
+              <p role="status" className="text-verde-claro text-sm text-center">
+                Recibimos tu consulta. Te contactamos a la brevedad.
+              </p>
+            )}
+            {estado === "error" && (
+              <p role="alert" className="text-white/80 text-sm text-center">
+                No pudimos enviar la consulta.{" "}
+                <a href={mensajeBoton} target="_blank" rel="noopener noreferrer" className="text-verde-claro underline">
+                  Escribinos por WhatsApp
+                </a>
+                .
+              </p>
+            )}
           </form>
         </motion.div>
       </motion.div>

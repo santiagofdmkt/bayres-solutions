@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, Phone, Mail, AtSign, MessageCircle } from "lucide-react";
 import { site, waLink, telLink } from "../lib/site";
@@ -8,38 +9,35 @@ import { registrarLead } from "../lib/leads";
 const inputClass =
   "bg-white/[0.08] border border-white/15 rounded px-3.5 py-2.5 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-verde-claro focus:ring-1 focus:ring-verde-claro transition-colors";
 
+type Estado = "idle" | "enviando" | "ok" | "error";
+
 export default function Contacto() {
   const reducido = useReducedMotion();
+  const [estado, setEstado] = useState<Estado>("idle");
 
-  function enviarPorWhatsApp(e: React.FormEvent<HTMLFormElement>) {
+  const waDirecto = waLink("Hola! Quiero hacer una consulta.");
+
+  async function enviarConsulta(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    const datos = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const datos = new FormData(form);
     const campo = (nombre: string) =>
       ((datos.get(nombre) as string) || "").trim();
 
-    const lineas = [
-      "Hola! Quiero hacer una consulta.",
-      `Nombre: ${campo("nombre")} ${campo("apellido")}`.trim(),
-      campo("email") && `Email: ${campo("email")}`,
-      campo("telefono") && `WhatsApp: ${campo("telefono")}`,
-      campo("direccion") && `Dirección: ${campo("direccion")}`,
-      campo("problema") && `Problema: ${campo("problema")}`,
-    ].filter(Boolean);
-
-      registrarLead(
+    setEstado("enviando");
+    const ok = await registrarLead(
       {
         nombre: campo("nombre"),
         apellido: campo("apellido"),
         email: campo("email"),
         telefono: campo("telefono"),
-        direccion: campo("direccion"),
+        barrio: campo("barrio"),
         problema: campo("problema"),
       },
       "contacto"
     );
-
-    window.open(waLink(lineas.join("\n")), "_blank");
+    setEstado(ok ? "ok" : "error");
+    if (ok) form.reset();
   }
 
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -67,7 +65,7 @@ export default function Contacto() {
     },
     ...(site.instagram
       ? [
-            {
+          {
             Icono: AtSign,
             etiqueta: "Instagram",
             valor: `@${site.instagram}`,
@@ -91,7 +89,7 @@ export default function Contacto() {
   };
 
   return (
-       <section id="contacto" className="relative py-12 lg:py-20 px-6 bg-negro overflow-hidden">
+    <section id="contacto" className="relative py-12 lg:py-20 px-6 bg-negro overflow-hidden">
       {/* Brillo verde detrás del formulario */}
       <div
         aria-hidden="true"
@@ -154,10 +152,10 @@ export default function Contacto() {
               Envianos tu consulta
             </h3>
             <p className="text-white/50 text-xs mb-5">
-              Te abrimos el WhatsApp con la consulta ya escrita.
+              Te respondemos a la brevedad por WhatsApp o mail.
             </p>
 
-            <form onSubmit={enviarPorWhatsApp} className="flex flex-col gap-3">
+            <form onSubmit={enviarConsulta} className="flex flex-col gap-3">
               <div className="grid grid-cols-2 gap-3">
                 <input
                   type="text"
@@ -203,9 +201,9 @@ export default function Contacto() {
                 />
                 <input
                   type="text"
-                  name="direccion"
-                  aria-label="Dirección"
-                  placeholder="Dirección"
+                  name="barrio"
+                  aria-label="Barrio o localidad"
+                  placeholder="Barrio"
                   className={inputClass}
                 />
               </div>
@@ -221,12 +219,24 @@ export default function Contacto() {
 
               <button
                 type="submit"
-                className="bg-verde-medio hover:bg-verde-claro hover:text-negro text-white py-3 rounded font-display font-bold uppercase tracking-widest text-sm transition-colors"
+                disabled={estado === "enviando"}
+                className="bg-verde-medio hover:bg-verde-claro hover:text-negro disabled:opacity-60 disabled:cursor-wait text-white py-3 rounded font-display font-bold uppercase tracking-widest text-sm transition-colors"
               >
-                Enviar consulta
+                {estado === "enviando" ? "Enviando..." : "Enviar consulta"}
               </button>
 
-              <a href={waLink("Hola! Quiero hacer una consulta.")}
+              {estado === "ok" && (
+                <p role="status" className="text-verde-claro text-sm text-center">
+                  Recibimos tu consulta. Te contactamos a la brevedad.
+                </p>
+              )}
+              {estado === "error" && (
+                <p role="alert" className="text-white/80 text-sm text-center">
+                  No pudimos enviar la consulta. Usá el botón de WhatsApp de abajo.
+                </p>
+              )}
+
+              <a href={waDirecto}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border border-verde-medio/50 hover:border-verde-claro text-verde-claro py-2.5 rounded text-xs font-semibold transition-colors"

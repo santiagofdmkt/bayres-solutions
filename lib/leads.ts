@@ -1,24 +1,29 @@
-// Manda el lead a /api/lead sin esperar la respuesta.
-// El formulario abre WhatsApp igual; esto es respaldo (Supabase + mail).
+// Manda el lead a /api/lead y espera la respuesta.
+// Devuelve true si el servidor lo recibió (aunque falle el mail, el lead queda en Supabase).
 
-type DatosLead = {
+export type DatosLead = {
   nombre: string;
   apellido: string;
   email: string;
   telefono: string;
-  direccion: string;
+  barrio: string;
   problema: string;
 };
 
-export function registrarLead(datos: DatosLead, origen: "hero" | "contacto") {
+export async function registrarLead(
+  datos: DatosLead,
+  origen: "hero" | "contacto"
+): Promise<boolean> {
   try {
-    fetch("/api/lead", {
+    const res = await fetch("/api/lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...datos, origen }),
-      keepalive: true,
-    }).catch(() => {});
+    });
+    if (!res.ok) return false;
+    const json = await res.json();
+    return Boolean(json.ok && json.guardado);
   } catch {
-    // Nunca frenar el envío por WhatsApp.
+    return false;
   }
 }

@@ -11,7 +11,7 @@ type Lead = {
   apellido?: string;
   email?: string;
   telefono?: string;
-  direccion?: string;
+  barrio?: string;
   problema?: string;
   origen?: string;
 };
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     apellido: (lead.apellido || "").trim() || null,
     email: (lead.email || "").trim() || null,
     telefono: (lead.telefono || "").trim() || null,
-    direccion: (lead.direccion || "").trim() || null,
+    barrio: (lead.barrio || "").trim() || null,
     problema: (lead.problema || "").trim() || null,
     origen: (lead.origen || "hero").trim(),
   };
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
       { auth: { persistSession: false } }
     );
-    const { error } = await supabase.from("leads").insert(datos);
+        const { error } = await supabase.from("bayres_leads").insert(datos);
     if (error) throw error;
     resultado.guardado = true;
   } catch (e) {
