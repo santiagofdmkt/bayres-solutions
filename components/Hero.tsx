@@ -106,7 +106,7 @@ export default function Hero() {
         {FOTOS.map((src, i) => (
           <div
             key={src}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-in-out ${
+                       className={`absolute inset-0 bg-cover bg-[position:65%_center] lg:bg-center transition-opacity duration-[1500ms] ease-in-out ${
               i === activa ? "opacity-100" : "opacity-0"
             } ${reducido ? "" : "kenburns"}`}
             style={{
@@ -116,7 +116,7 @@ export default function Hero() {
           />
         ))}
         {/* Overlay: oscuro a la izquierda para el texto, verde abajo para fundir con los stats */}
-        <div className="absolute inset-0 bg-gradient-to-r from-negro/95 via-negro/75 to-negro/50" />
+               <div className="absolute inset-0 bg-gradient-to-b from-negro/85 via-negro/70 to-negro/85 lg:bg-gradient-to-r lg:from-negro/95 lg:via-negro/75 lg:to-negro/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-verde-oscuro/60 via-transparent to-transparent" />
       </div>
 
@@ -152,7 +152,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="text-white/75 text-base lg:text-lg leading-relaxed mb-8 max-w-md"
+                      className="text-white text-base lg:text-lg leading-relaxed mb-8 max-w-md drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
           >
             Servicio certificado para {site.zonas}. Atendemos hogares,
             comercios, industrias y consorcios con productos habilitados por

@@ -45,7 +45,7 @@ export default function Navbar() {
           : "bg-negro border-b border-transparent"
       }`}
     >
-          <div className="max-w-6xl mx-auto px-6 h-[96px] flex items-center justify-between gap-6">
+              <div className="max-w-6xl mx-auto px-6 h-[84px] lg:h-[112px] flex items-center justify-between gap-6">
         {/* Logo */}
         <Link href="#" aria-label={`${site.nombre} - inicio`} className="flex-shrink-0">
           <Image
@@ -54,7 +54,7 @@ export default function Navbar() {
                      width={220}
             height={88}
             priority
-            className="h-[84px] w-auto"
+                      className="h-[72px] lg:h-[100px] w-auto"
           />
         </Link>
 

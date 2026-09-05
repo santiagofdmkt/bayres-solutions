@@ -26,7 +26,7 @@ export default function VolverArriba() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 16, scale: 0.9 }}
           transition={{ duration: 0.25 }}
-                   className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-12 h-12 rounded-full bg-verde-medio hover:bg-verde-claro text-white hover:text-negro shadow-lg shadow-black/30 flex items-center justify-center transition-colors"
+               className="fixed bottom-6 inset-x-0 mx-auto z-40 w-12 h-12 rounded-full bg-verde-medio hover:bg-verde-claro text-white hover:text-negro shadow-lg shadow-black/30 flex items-center justify-center transition-colors"
         >
           <ArrowUp size={22} strokeWidth={2.5} />
         </motion.button>
