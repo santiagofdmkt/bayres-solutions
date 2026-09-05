@@ -17,19 +17,24 @@ export const site = {
   // PENDIENTE: confirmar con el cliente. Hoy apunta al fijo.
   whatsapp: "541152262061",
 
-  email: "contacto@bayressolutions.com.ar",
+   email: "contacto@bayressolutions.com.ar",
+
+  // Usuario de Instagram sin @. Dejar "" si no tienen cuenta y desaparece del sitio.
+  // PENDIENTE: confirmar con el cliente.
+  instagram: "bayressolutions",
 
   // Ubicación (se usa en Footer y en el JSON-LD LocalBusiness)
   direccion: "Cuba 3489",
   barrio: "Núñez",
   ciudad: "Ciudad Autónoma de Buenos Aires",
-  codigoPostal: "C1429",
+    codigoPostal: "1429",
+  pais: "Argentina",
   zonas: "CABA y Gran Buenos Aires",
 
   // OJO: estos números tienen que ser reales.
   // Google penaliza inconsistencias entre la web y la ficha del negocio.
   stats: [
-    { num: "+500", label: "Clientes atendidos" },
+    { num: "+500", label: "Casos atendidos" },
     { num: "10+", label: "Años de experiencia" },
     { num: "4", label: "Servicios especializados" },
     { num: "24hs", label: "Atención de urgencias" },
