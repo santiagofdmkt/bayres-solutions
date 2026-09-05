@@ -64,7 +64,7 @@ export async function POST(req: Request) {
         .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td style="padding:4px 0"><b>${v}</b></td></tr>`)
         .join("");
       await resend.emails.send({
-        from: `${site.nombre} <onboarding@resend.dev>`,
+               from: `${site.nombre} <bayres@bunnytech.ar>`,
         to: site.email,
         subject: `Nuevo lead (${datos.origen}): ${datos.nombre} ${datos.apellido ?? ""}`.trim(),
         html: `<h2 style="font-family:sans-serif">Nueva consulta desde la web</h2><table style="font-family:sans-serif;font-size:14px">${filas}</table>`,
