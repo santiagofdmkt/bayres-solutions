@@ -39,14 +39,18 @@ export default function Cobertura() {
   };
 
   return (
-    <section
+     <section
       id="cobertura"
-      className="relative py-20 px-6 bg-white overflow-hidden"
+      className="relative py-20 px-6 bg-gradient-to-br from-gris-claro via-[#e6f3e7] to-[#cfe9d2] overflow-hidden"
     >
-      {/* Tinte verde muy suave en la esquina inferior derecha */}
+      {/* Manchas verdes difusas */}
       <div
         aria-hidden="true"
-        className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-verde-claro/10 blur-3xl pointer-events-none"
+        className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-verde-claro/25 blur-3xl pointer-events-none"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -top-32 -left-32 w-[400px] h-[400px] rounded-full bg-verde-medio/10 blur-3xl pointer-events-none"
       />
 
       <div className="max-w-6xl mx-auto relative">
