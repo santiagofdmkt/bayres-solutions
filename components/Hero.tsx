@@ -12,7 +12,7 @@ const FOTOS = [
   "/hero/hero-3.jpg",
   "/hero/hero-4.jpg",
 ];
-const INTERVALO_MS = 6000;
+const INTERVALO_MS = 4500;
 
 const inputClass =
   "bg-white/[0.08] border border-white/15 rounded px-3.5 py-2.5 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-verde-claro focus:ring-1 focus:ring-verde-claro transition-colors";
