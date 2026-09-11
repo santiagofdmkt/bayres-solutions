@@ -21,8 +21,8 @@ export const site = {
   email: "adm.bairessolutions@gmail.com",
 
   // Usuario de Instagram sin @. Dejar "" si no tienen cuenta y desaparece del sitio.
-  // PENDIENTE: confirmar con el cliente.
-  instagram: "bayressolutions",
+  // Verificado en Google: la cuenta real es @bayres.solutions (con punto).
+  instagram: "bayres.solutions",
 
   // Ubicación (se usa en Footer y en el JSON-LD LocalBusiness)
   direccion: "Cuba 3489",

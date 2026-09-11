@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const URL_SITIO = "https://bayres-solutions.vercel.app";
+const URL_SITIO = "https://www.bayressolutions.com.ar";
 const TITULO = "Bayres Solutions | Control de Plagas en CABA y GBA";
 const DESCRIPCION =
   "Desinsectación, desratización, desinfección y limpieza de tanques en Capital Federal y Gran Buenos Aires. Productos habilitados por SENASA. Urgencias los 7 días.";
