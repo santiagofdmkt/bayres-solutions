@@ -35,6 +35,37 @@ export const site = {
   pais: "Argentina",
   zonas: "CABA y Gran Buenos Aires",
 
+  // Horario de atención. Sale de la ficha de Google (11/9/2026).
+  // PENDIENTE: confirmar con el cliente, la web dice "urgencias los 7 días".
+  // Los días van en inglés porque el JSON-LD (schema.org) los pide así.
+  horario: [
+    {
+      dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      abre: "09:00",
+      cierra: "23:30",
+    },
+  ],
+
+  // Servicios. Se usan en el JSON-LD para que Google sepa qué hace el negocio.
+  servicios: [
+    {
+      nombre: "Desinsectación",
+      descripcion: "Tratamientos contra cucarachas, mosquitos, hormigas y otros insectos.",
+    },
+    {
+      nombre: "Desratización",
+      descripcion: "Control profesional de roedores con métodos seguros y autorizados.",
+    },
+    {
+      nombre: "Desinfección",
+      descripcion: "Higiene ambiental para eliminar bacterias, hongos y virus.",
+    },
+    {
+      nombre: "Limpieza de tanques de agua",
+      descripcion: "Limpieza y desinfección completa de tanques de agua.",
+    },
+  ],
+
   // OJO: estos números tienen que ser reales.
   // Google penaliza inconsistencias entre la web y la ficha del negocio.
   stats: [

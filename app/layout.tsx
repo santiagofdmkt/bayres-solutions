@@ -70,6 +70,51 @@ export const metadata: Metadata = {
   },
 };
 
+// Datos estructurados para Google (schema.org LocalBusiness).
+// Todo sale de site.ts: si cambia un dato ahí, cambia acá.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: site.nombre,
+  legalName: "Bayres Solutions SRL",
+  description: DESCRIPCION,
+  url: site.url,
+  logo: `${site.url}/logo.png`,
+  image: `${site.url}/og.jpg`,
+  telephone: `+${site.telefono}`,
+  email: site.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.direccion,
+    addressLocality: site.ciudad,
+    postalCode: site.codigoPostal,
+    addressCountry: "AR",
+  },
+  areaServed: [
+    { "@type": "City", name: "Ciudad Autónoma de Buenos Aires" },
+    { "@type": "AdministrativeArea", name: "Gran Buenos Aires" },
+  ],
+  openingHoursSpecification: site.horario.map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: h.dias,
+    opens: h.abre,
+    closes: h.cierra,
+  })),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios de control de plagas",
+    itemListElement: site.servicios.map((s) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: s.nombre,
+        description: s.descripcion,
+      },
+    })),
+  },
+  sameAs: site.instagram ? [`https://instagram.com/${site.instagram}`] : [],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -77,7 +122,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${barlow.variable} ${barlowCondensed.variable}`}>
-      <body>{children}</body>
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {children}
+      </body>
     </html>
   );
 }
