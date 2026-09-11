@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
+import { site } from "@/lib/site";
 
-const URL_SITIO = "https://www.bayressolutions.com.ar";
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-barlow",
+  display: "swap",
+});
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "900"],
+  variable: "--font-barlow-condensed",
+  display: "swap",
+});
+
+const URL_SITIO = site.url;
 const TITULO = "Bayres Solutions | Control de Plagas en CABA y GBA";
 const DESCRIPCION =
   "Desinsectación, desratización, desinfección y limpieza de tanques en Capital Federal y Gran Buenos Aires. Productos habilitados por SENASA. Urgencias los 7 días.";
@@ -60,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${barlow.variable} ${barlowCondensed.variable}`}>
       <body>{children}</body>
     </html>
   );

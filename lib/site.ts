@@ -4,6 +4,9 @@
 export const site = {
   nombre: "Bayres Solutions",
 
+  // URL pública del sitio, sin barra final. La usan layout, sitemap, robots y JSON-LD.
+  url: "https://www.bayressolutions.com.ar",
+
   // Teléfono fijo. Formato internacional SIN el +, sin espacios ni guiones.
   // Es línea fija, por eso NO lleva el 9 después del 54.
   // 011 5226-2061  =>  "541152262061"

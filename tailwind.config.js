@@ -21,8 +21,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        display: ["Barlow Condensed", "sans-serif"],
-        body: ["Barlow", "sans-serif"],
+        display: ["var(--font-barlow-condensed)", "sans-serif"],
+        body: ["var(--font-barlow)", "sans-serif"],
       },
     },
   },
